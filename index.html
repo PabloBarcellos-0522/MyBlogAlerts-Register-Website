@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gerenciamento de Cadastro - MyBlogAlerts</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h1>MyBlogAlerts</h1>
+
+            <div class="forms-wrapper">
+                <!-- Registration Form -->
+                <div class="form-section">
+                    <h2>Cadastre-se</h2>
+                    <form id="register-form">
+                        <label for="register-matricula">Matrícula</label>
+                        <input type="text" id="register-matricula" required />
+
+                        <label for="register-password">Senha</label>
+                        <input type="password" id="register-password" required />
+
+                        <label for="register-phone">Telefone (Ex: 5527999998888)</label>
+                        <input
+                            type="tel"
+                            id="register-phone"
+                            placeholder="5527999998888"
+                            required
+                        />
+
+                        <label for="register-token">Token de Autenticação</label>
+                        <input type="password" id="register-token" required />
+
+                        <button type="submit" id="register-btn">Cadastrar</button>
+                    </form>
+                </div>
+
+                <!-- Deletion Form -->
+                <div class="form-section">
+                    <h2>Excluir Cadastro</h2>
+                    <form id="delete-form">
+                        <label for="delete-matricula">Matrícula</label>
+                        <input type="text" id="delete-matricula" required />
+
+                        <label for="delete-password">Senha</label>
+                        <input type="password" id="delete-password" required />
+
+                        <label for="delete-token">Token de Autenticação</label>
+                        <input type="password" id="delete-token" required />
+
+                        <button type="submit" id="delete-btn" class="delete-btn">Excluir</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Message Area -->
+            <div id="message-area" class="message-area"></div>
+        </div>
+
+        <script src="script.js" defer></script>
+    </body>
+</html>

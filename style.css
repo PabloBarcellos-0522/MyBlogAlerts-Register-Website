@@ -1,0 +1,107 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+}
+.container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    box-sizing: border-box;
+    transition: max-width 0.3s ease-in-out;
+}
+h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+.forms-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.form-section {
+    margin-bottom: 0; /* Replaced by gap in forms-wrapper */
+}
+.form-section h2 {
+    font-size: 1.2rem;
+    border-bottom: 1px solid #dddfe2;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #1877f2;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+button:hover {
+    background-color: #166fe5;
+}
+button.delete-btn {
+    background-color: #fa3e3e;
+}
+button.delete-btn:hover {
+    background-color: #e03030;
+}
+.message-area {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 6px;
+    display: none; /* Hidden by default */
+    font-weight: 500;
+}
+.message-area.success {
+    background-color: #e7f3ff;
+    color: #1877f2;
+    display: block;
+}
+.message-area.error {
+    background-color: #ffebe8;
+    color: #fa3e3e;
+    display: block;
+}
+
+/* Responsive layout for larger screens */
+@media (min-width: 900px) {
+    .container {
+        max-width: 900px;
+    }
+    .forms-wrapper {
+        flex-direction: row;
+        align-items: flex-start; /* Align forms to the top */
+    }
+    .form-section {
+        flex: 1; /* Each form takes equal space */
+    }
+}
