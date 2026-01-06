@@ -1,7 +1,6 @@
 "use strict"
 
-// IMPORTANTE: Altere esta URL para a URL base da sua API
-const API_BASE_URL = "https://tidy-wasps-yawn.loca.lt"
+// A variável API_BASE_URL é injetada durante o build pelo GitHub Actions.
 
 document.addEventListener("DOMContentLoaded", () => {
     // Elementos do formulário de registro

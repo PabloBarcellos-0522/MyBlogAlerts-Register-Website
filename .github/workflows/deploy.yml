@@ -1,0 +1,48 @@
+# Fluxo de trabalho para build e deploy no GitHub Pages
+name: Deploy to GitHub Pages
+
+on:
+    # Roda quando há um push na branch main
+    push:
+        branches:
+            - main
+            - master
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+env:
+    API_BASE_URL: ${{ vars.API_BASE_URL }}
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: ⬇️ Checkout do código
+              uses: actions/checkout@v4
+
+            - name: 🔄 Substituir URL da API
+              run: |
+                  # Verifica se o arquivo de template existe
+                  if [ ! -f script.js ]; then
+                    echo "Erro: script.js não encontrado!"
+                    exit 1
+                  fi
+                  # Copia o script.js para um template temporário
+                  cp script.js script.template.js
+                  # Substitui o placeholder pela variável de ambiente e cria o script.js final
+                  sed -i "s|const API_BASE_URL = ".*";|const API_BASE_URL = "${API_BASE_URL}";|" script.template.js
+                  mv script.template.js script.js
+
+            - name: ⬆️ Upload do Artefato para o Pages
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  # Faz o upload do diretório raiz
+                  path: "."
+
+            - name: 🚀 Deploy no GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
