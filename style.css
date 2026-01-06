@@ -63,6 +63,10 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px; /* Garante altura consistente */
 }
 button:hover {
     background-color: #166fe5;
@@ -103,5 +107,34 @@ button.delete-btn:hover {
     }
     .form-section {
         flex: 1; /* Each form takes equal space */
+    }
+}
+
+/* --- Estilos para Loading --- */
+
+button:disabled {
+    cursor: wait;
+    background-color: #a0bdf0;
+}
+
+button.delete-btn:disabled {
+    background-color: #fca9a9;
+}
+
+.loader {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

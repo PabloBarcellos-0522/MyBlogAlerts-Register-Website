@@ -10,12 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const registerPasswordInput = document.getElementById("register-password")
     const registerPhoneInput = document.getElementById("register-phone")
     const registerTokenInput = document.getElementById("register-token")
+    const registerButton = registerForm.querySelector("button")
 
     // Elementos do formulário de exclusão
     const deleteForm = document.getElementById("delete-form")
     const deleteMatriculaInput = document.getElementById("delete-matricula")
     const deletePasswordInput = document.getElementById("delete-password")
     const deleteTokenInput = document.getElementById("delete-token")
+    const deleteButton = deleteForm.querySelector("button")
 
     // Área de mensagem
     const messageArea = document.getElementById("message-area")
@@ -35,10 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return
         }
 
-        if (API_BASE_URL === "URL_DA_API_AQUI") {
-            showMessage("A URL da API ainda não foi configurada no script.", "error")
-            return
-        }
+        const originalButtonHtml = registerButton.innerHTML
+        registerButton.disabled = true
+        registerButton.innerHTML = '<div class="loader"></div>'
 
         try {
             const response = await fetch(`${API_BASE_URL}/students`, {
@@ -65,6 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             showMessage("Erro de conexão. Verifique o console para mais detalhes.", "error")
             console.error("Registration Error:", error)
+        } finally {
+            registerButton.disabled = false
+            registerButton.innerHTML = originalButtonHtml
         }
     })
 
@@ -82,10 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return
         }
 
-        if (API_BASE_URL === "URL_DA_API_AQUI") {
-            showMessage("A URL da API ainda não foi configurada no script.", "error")
-            return
-        }
+        const originalButtonHtml = deleteButton.innerHTML
+        deleteButton.disabled = true
+        deleteButton.innerHTML = '<div class="loader"></div>'
 
         try {
             const response = await fetch(`${API_BASE_URL}/students/${matricula}`, {
@@ -107,6 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             showMessage("Erro de conexão. Verifique o console para mais detalhes.", "error")
             console.error("Deletion Error:", error)
+        } finally {
+            deleteButton.disabled = false
+            deleteButton.innerHTML = originalButtonHtml
         }
     })
 
