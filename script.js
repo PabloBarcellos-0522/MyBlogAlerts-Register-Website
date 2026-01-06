@@ -1,7 +1,7 @@
 "use strict"
 
 // IMPORTANTE: Altere esta URL para a URL base da sua API
-const API_BASE_URL = "https://blue-experts-wait.loca.lt"
+const API_BASE_URL = "https://tidy-wasps-yawn.loca.lt"
 
 document.addEventListener("DOMContentLoaded", () => {
     // Elementos do formulário de registro
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify({ senha }),
+                body: JSON.stringify({ password: senha }),
             })
 
             if (response.ok) {
