@@ -26,17 +26,20 @@ jobs:
 
             - name: 🔄 Substituir URL da API
               run: |
-                  # Verifica se o arquivo de template existe
+                  # Verifica se o script original existe
                   if [ ! -f script.js ]; then
-                    echo "Erro: script.js não encontrado!"
-                    exit 1
+                  echo "script.js não foi encontrado!"
+                  exit 1
                   fi
-                  # Copia o script.js para um template temporário
-                  cp script.js script.template.js
-                  # Substitui o placeholder pela variável de ambiente e cria o script.js final
-                  sed -i "s|const API_BASE_URL = ".*";|const API_BASE_URL = "${API_BASE_URL}";|" script.template.js
-                  mv script.template.js script.js
 
+                  # Usa sed para encontrar a linha do placeholder e substituí-la pela variável.
+                  # O resultado é salvo em um arquivo temporário e depois movido de volta,
+                  # para modificar o script que será usado no deploy.
+                  TEMP_SCRIPT=$(mktemp)
+                  sed "s|const API_BASE_URL = \".*\";|const API_BASE_URL = \"$API_BASE_URL\";|" script.js > "$TEMP_SCRIPT" && mv "$TEMP_SCRIPT" script.js
+
+                  echo "URL substituída. Verificando o conteúdo de script.js:"
+                  grep "API_BASE_URL" script.js
             - name: ⬆️ Upload do Artefato para o Pages
               uses: actions/upload-pages-artifact@v3
               with:

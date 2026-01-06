@@ -1,6 +1,7 @@
 "use strict"
 
-// A variável API_BASE_URL é injetada durante o build pelo GitHub Actions.
+// A API_BASE_URL é injetada durante o build. O valor abaixo é um placeholder.
+const API_BASE_URL = "https://placeholder-for-build.com";
 
 document.addEventListener("DOMContentLoaded", () => {
     // Elementos do formulário de registro
