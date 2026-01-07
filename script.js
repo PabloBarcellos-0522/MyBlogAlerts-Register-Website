@@ -1,6 +1,6 @@
 "use strict"
 
-const API_BASE_URL = "https://tame-showers-dance.loca.lt/"
+const API_BASE_URL = "https://placeholder-for-build.com"
 
 document.addEventListener("DOMContentLoaded", () => {
     const registerForm = document.getElementById("register-form")
