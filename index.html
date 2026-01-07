@@ -58,6 +58,21 @@
             <div id="message-area" class="message-area"></div>
         </div>
 
+        <!-- Verification Code Modal -->
+        <div id="verification-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+                <h2>Verifique seu WhatsApp</h2>
+                <p>Enviamos um código de verificação para o seu número. Por favor, insira-o abaixo:</p>
+                <form id="verification-form">
+                    <label for="verification-code">Código de Verificação</label>
+                    <input type="text" id="verification-code" required />
+                    <button type="submit" id="verify-btn">Confirmar</button>
+                    <div id="modal-message-area" class="message-area"></div>
+                </form>
+            </div>
+        </div>
+
         <script src="script.js" defer></script>
     </body>
 </html>
