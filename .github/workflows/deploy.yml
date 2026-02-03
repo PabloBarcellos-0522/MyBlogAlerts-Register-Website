@@ -24,27 +24,37 @@ jobs:
             - name: ⬇️ Checkout do código
               uses: actions/checkout@v4
 
-            - name: 🔄 Substituir URL da API
+            - name: 🧪 Debug da variável de ambiente
               run: |
-                  # Verifica se o script original existe
-                  if [ ! -f script.js ]; then
-                  echo "script.js não foi encontrado!"
+                echo "API_BASE_URL recebido pelo workflow:"
+                echo "API_BASE_URL=$API_BASE_URL"
+
+                if [ -z "$API_BASE_URL" ]; then
+                  echo "❌ ERRO: API_BASE_URL está vazia"
                   exit 1
-                  fi
+                fi
 
-                  # Usa sed para encontrar a linha do placeholder e substituí-la pela variável.
-                  # O resultado é salvo em um arquivo temporário e depois movido de volta,
-                  # para modificar o script que será usado no deploy.
-                  TEMP_SCRIPT=$(mktemp)
-                  sed "s|const API_BASE_URL = \".*\";|const API_BASE_URL = \"$API_BASE_URL\";|" script.js > "$TEMP_SCRIPT" && mv "$TEMP_SCRIPT" script.js
+            - name: 🔄 Substituir URL da API no script.js
+              run: |
+                FILE="script.js"
 
-                  echo "URL substituída. Verificando o conteúdo de script.js:"
-                  grep "API_BASE_URL" script.js
+                if [ ! -f "$FILE" ]; then
+                  echo "❌ ERRO: $FILE não encontrado na raiz do projeto"
+                  exit 1
+                fi
+
+                echo "📄 Conteúdo ANTES da substituição:"
+                grep "API_BASE_URL" "$FILE"
+
+                sed -i "s|const API_BASE_URL *= *\"[^\"]*\"|const API_BASE_URL = \"$API_BASE_URL\"|g" "$FILE"
+
+                echo "📄 Conteúdo DEPOIS da substituição:"
+                grep "API_BASE_URL" "$FILE"
             - name: ⬆️ Upload do Artefato para o Pages
               uses: actions/upload-pages-artifact@v3
               with:
-                  # Faz o upload do diretório raiz
-                  path: "."
+                # Faz o upload do diretório raiz
+                path: "."
 
             - name: 🚀 Deploy no GitHub Pages
               id: deployment
